@@ -3,7 +3,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import {Subject} from "rxjs";
 import {Router} from "@angular/router";
-import {relativeToRootDirs} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +10,8 @@ import {relativeToRootDirs} from "@angular/compiler-cli/src/transformers/util";
 export class AuthService {
   signinChanged = new Subject<boolean>();
   token: string;
-  constructor(private router: Router) {
-    this.signinChanged.next(false);
-  }
+
+  constructor(private router: Router) {}
 
   signupUser(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
