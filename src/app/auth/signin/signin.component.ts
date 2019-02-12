@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {AuthService} from "../auth.service";
 import {DataStorageService} from "../../shared/data-storage.service";
+import * as fromApp from '../../store/app.reducers';
+import * as AuthActions from '../store/auth.actions';
+import {Store} from "@ngrx/store";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signin',
@@ -10,8 +13,9 @@ import {DataStorageService} from "../../shared/data-storage.service";
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private authService: AuthService,
-              private dataStorage: DataStorageService) { }
+  constructor(private store: Store<fromApp.AppState>,
+              private dataStorage: DataStorageService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -19,8 +23,8 @@ export class SigninComponent implements OnInit {
   onSignin(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
-    this.authService.signinUser(email, password);
-      setTimeout(() =>this.getRecipes(),2000); // need to wait awhile for the token to be returned
+    this.store.dispatch(new AuthActions.TrySignin({username: email, password: password}));
+    setTimeout(() =>this.dataStorage.getRecipes(),1000); // need to wait awhile for the token to be returned
 
   }
   getRecipes() {
