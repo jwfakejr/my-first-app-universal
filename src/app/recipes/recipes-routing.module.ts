@@ -9,9 +9,9 @@ import {Routes, RouterModule} from "@angular/router";
 const recipesRoutes: Routes = [
   {path: '', component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent },
-    {path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard]},
-    {path: ':id', component: RecipeDetailComponent},
-    {path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard]},
+    { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
+    { path: ':id', component: RecipeDetailComponent },
+    { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] },
     ]
   },
 ];

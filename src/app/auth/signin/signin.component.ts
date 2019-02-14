@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {DataStorageService} from "../../shared/data-storage.service";
-import * as fromApp from '../../store/app.reducers';
-import * as AuthActions from '../store/auth.actions';
 import {Store} from "@ngrx/store";
-import {Router} from "@angular/router";
+import * as AuthActions from '../../auth/store/auth.actions';
+import * as RecipeActions from '../../recipes/store/recipe.actions';
+import * as fromApp from '../../store/app.reducers';
+
 
 @Component({
   selector: 'app-signin',
@@ -14,8 +14,8 @@ import {Router} from "@angular/router";
 export class SigninComponent implements OnInit {
 
   constructor(private store: Store<fromApp.AppState>,
-              private dataStorage: DataStorageService,
-              private router: Router) { }
+
+             ) { }
 
   ngOnInit() {
   }
@@ -24,10 +24,8 @@ export class SigninComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     this.store.dispatch(new AuthActions.TrySignin({username: email, password: password}));
-    setTimeout(() =>this.dataStorage.getRecipes(),1000); // need to wait awhile for the token to be returned
+    setTimeout(() =>this.store.dispatch(new RecipeActions.FetchRecipes()), 1000);
 
   }
-  getRecipes() {
-    this.dataStorage.getRecipes();
-  }
+
 }
