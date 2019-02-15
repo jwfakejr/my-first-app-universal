@@ -6,56 +6,7 @@
   <base href="/">
   <script src="./assets/jquery.js"></script>
   <script src="./assets/colResizable-1.6.js"></script>
-  <script type="text/javascript">
-    $(function(){
 
-      var innerHTML = $("#updatePanel").html();
-
-      var onTablesCreated = function(){
-        $("#normal").colResizable({
-          liveDrag:true,
-          gripInnerHtml:"<div class='grip'></div>",
-          draggingClass:"dragging",
-          resizeMode:'fit',
-          postbackSafe:true,
-          partialRefresh:true});
-
-        $("#flex").colResizable({
-          liveDrag:true,
-          gripInnerHtml:"<div class='grip'></div>",
-          draggingClass:"dragging",
-          resizeMode:'flex',
-          postbackSafe:true,
-          partialRefresh:true});
-
-
-        $("#overflow").colResizable({
-          liveDrag:true,
-          gripInnerHtml:"<div class='grip'></div>",
-          draggingClass:"dragging",
-          resizeMode:'overflow',
-          postbackSafe:true,
-          partialRefresh:true});
-      }
-
-      var fakePostback = function(){
-        $("#updatePanel").html('<img src="/assets/img/loading.gif"/>');
-        setTimeout(function(){
-          $("#updatePanel").html(innerHTML);
-          onPostbackOver();
-        }, 700);
-      };
-
-      var onPostbackOver = function(){
-        onTablesCreated();
-      };
-
-
-      $("#postback").click(fakePostback);
-      onPostbackOver();
-
-    });
-  </script>
 
 </head>
 <body>

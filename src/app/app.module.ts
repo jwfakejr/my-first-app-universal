@@ -11,7 +11,7 @@ import { AuthModule } from './auth/auth.module'
 import { CoreModule } from './core/core.module';
 import { reducers } from './store/app.reducers';
 import {EffectsModule} from "@ngrx/effects";
-import {AuthEffects} from "./auth/auth.effects";
+import {AuthEffects} from "./auth/store/auth.effects";
 import {StoreRouterConnectingModule} from "@ngrx/router-store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 

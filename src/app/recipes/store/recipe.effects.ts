@@ -1,7 +1,8 @@
+import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {withLatestFrom, map, switchMap} from 'rxjs/operators';
-import {Actions, Effect, ofType} from '@ngrx/effects';
+import {map, switchMap, withLatestFrom} from 'rxjs/operators';
+
 import {Store} from '@ngrx/store';
 import {Recipe} from '../recipe.model';
 import {environment} from '../../../environments/environment';
@@ -14,10 +15,10 @@ export class RecipeEffects {
   @Effect()
   recipeFetch = this.actions$.pipe(
     ofType(RecipeActions.FETCH_RECIPES),
-    switchMap(() =>
-      this.http.get<Recipe[]>(environment.apiUrl)
+      switchMap(() =>
+      this.http.get<Recipe[]>(environment.apiUrl)),
 
-    ),
+
     map(recipes => new RecipeActions.SetRecipes(recipes))
   );
 
